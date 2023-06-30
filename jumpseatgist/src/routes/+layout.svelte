@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	// The ordering of these imports is critical to your app working properly
 	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
@@ -9,16 +10,23 @@
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 
 	import Footer from '../components/Footer.svelte';
+	import Connect from '../components/Connect.svelte';
+	import Status from '../components/Status.svelte';
+
+	import { connectWebSocket } from './socket.js';
+
+	onMount(() => {
+		connectWebSocket();
+	});
+	// connectWebSocket();
 </script>
 
-
 <AppShell>
-
 	<svelte:fragment slot="header">
 		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
-			<svelte:fragment slot="lead">Connected - 3s ago</svelte:fragment>
+			<svelte:fragment slot="lead"><Connect /></svelte:fragment>
 			<svelte:fragment slot="default">
-				<button class="btn variant-filled-error">AOR</button>
+				<Status />
 
 				<!-- https://www.skeleton.dev/utilities/popups#combobox -->
 				<button class="btn variant-ghost-primary">E3</button>

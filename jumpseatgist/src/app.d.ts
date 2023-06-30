@@ -9,3 +9,4 @@ declare namespace App {
 }
 
 declare module 'leaflet';
+declare module 'ws';
